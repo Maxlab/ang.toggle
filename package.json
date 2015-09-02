@@ -1,23 +1,7 @@
 {
-  "name": "ngFit",
+  "name": "ngToggle",
   "version": "1.0.0",
-  "description": "It is a simple application that runs gulp and helps in work.",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Severenit/ngFit.git"
-  },
-  "keywords": [
-    "ngFit",
-    "angualrjs"
-  ],
-  "author": "Zar Zakharov",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Severenit/ngFit/issues"
-  },
+  "repository": "https://github.com/Maxlab/ang.toggle",
   "devDependencies": {
     "gulp": "^3.9.0",
     "gulp-concat": "^2.5.2",

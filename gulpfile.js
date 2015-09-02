@@ -79,6 +79,6 @@ gulp.task('default', [
   'img',
   'js',
   'sass',
-  'webserver',
-  'watch'
+  'watch',
+  'webserver'
 ]);

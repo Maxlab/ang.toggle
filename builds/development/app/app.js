@@ -7,15 +7,9 @@ $.material.init();
 
   angular
     .module(
-      'ngFit', [
-      'ngFit.main',
-      'ngFit.contact',
-      'ngFit.about',
-      'ngFit.service.firebase'
+      'ngToggle', [
+      'ngFit.main'
     ])
-    .value('appVars',{
-      firebase_url: 'https://boiling-fire-9514.firebaseio.com/'
-    })
   ;
 
 })();
