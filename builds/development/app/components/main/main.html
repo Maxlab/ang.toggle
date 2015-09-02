@@ -1,0 +1,33 @@
+<h2>{{vm.title}}</h2>
+<pre>{{vm.users|json}}</pre>
+
+
+<div class="form-group">
+  <label>
+    <input type="checkbox" ng-click="revert"> Order By Age
+  </label>
+</div>
+
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Имя</th>
+      <th>Возраст</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in vm.users | revert">
+      <td>{{user.$id}}</td>
+      <td>{{user.name}}</td>
+      <td>{{user.age}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<form name="newUser" ng-submit="vm.addUser()">
+  <input class="form-control" type="text" ng-model="vm.user.name"/>
+  <input class="form-control" type="number" ng-model="vm.user.age"/>
+  <button class="btn btn-primary">ADD USER</button>
+</form>

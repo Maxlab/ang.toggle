@@ -1,0 +1,18 @@
+<div class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="javascript:void(0)">AngularApp</a>
+  </div>
+  <div class="navbar-collapse collapse navbar-responsive-collapse">
+    <ul class="nav navbar-nav">
+      <li ng-class="{'active':(curPath == 'main')}"><a href="#/">Home</a></li>
+      <li ng-class="{'active':(curPath == 'about')}"><a href="#/about">About</a></li>
+      <li ng-class="{'active':(curPath == 'contact')}"><a href="#/contact">Contacts</a></li>
+    </ul>
+    <form class="navbar-form navbar-left">
+      <input type="text" class="form-control col-lg-8" placeholder="Search">
+    </form>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="" data-toggle="modal" data-target="#complete-dialog">SignIn</a></li>
+    </ul>
+  </div>
+</div>
