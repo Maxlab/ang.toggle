@@ -1,33 +1,40 @@
-<h2>{{vm.title}}</h2>
-<pre>{{vm.users|json}}</pre>
+<div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
 
 
-<div class="form-group">
-  <label>
-    <input type="checkbox" ng-click="revert"> Order By Age
-  </label>
+    <h2>{{vm.title}}</h2>
+
+    <table class="table table-striped table-hover ">
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th>Time</th>
+        <th>Price</th>
+        <th>Price for all Time</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="v in vm.toggles">
+        <td><input type="text" ng-model="v.title"/></td>
+        <td>{{v.time}}</td>
+        <td><input type="number" ng-model="v.pricePerSeconds"/></td>
+        <td>{{v.priceForAllTime}}</td>
+        <td>
+          <a ng-click="vm.deleteToggle(v)" class="btn btn-default btn-xs"><i class="mdi-action-highlight-remove"></i></a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <form name="addToggle" ng-submit="vm.addToggle()">
+      <input class="form-control" type="text" ng-model="vm.toggle.title"/>
+      <input class="form-control" type="number" ng-model="vm.toggle.pricePerSeconds"/>
+      <button class="btn btn-primary">ADD TOGGLE</button>
+    </form>
+
+
+
+  </div>
 </div>
-
-<table class="table table-striped table-hover ">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>Имя</th>
-      <th>Возраст</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="user in vm.users | revert">
-      <td>{{user.$id}}</td>
-      <td>{{user.name}}</td>
-      <td>{{user.age}}</td>
-    </tr>
-  </tbody>
-</table>
-
-
-<form name="newUser" ng-submit="vm.addUser()">
-  <input class="form-control" type="text" ng-model="vm.user.name"/>
-  <input class="form-control" type="number" ng-model="vm.user.age"/>
-  <button class="btn btn-primary">ADD USER</button>
-</form>

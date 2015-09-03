@@ -8,7 +8,9 @@ $.material.init();
   angular
     .module(
       'ngToggle', [
-      'ngFit.main'
+      'ngFit.main',
+      'ngStorage',
+      'timer'
     ])
   ;
 
