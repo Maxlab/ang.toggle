@@ -58,9 +58,7 @@ gulp.task('libs', function() {
             bc+'angular-route/angular-route.js',
             bc+'angular-sanitize/angular-sanitize.js',
             bc+'angular-touch/angular-touch.js',
-            bc+'firebase/firebase.js',
             bc+'ngstorage/ngStorage.js',
-            bc+'momentjs/moment.js',
           ])
       .pipe(concat('angular.concat.js'))
       .pipe(gulp.dest('./builds/dist/libs/angular/'));

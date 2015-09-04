@@ -21,7 +21,16 @@
         <td><input type="number" ng-model="v.pricePerSeconds"/></td>
         <td>{{v.priceForAllTime}}</td>
         <td>
-          <a ng-click="vm.deleteToggle(v)" class="btn btn-default btn-xs"><i class="mdi-action-highlight-remove"></i></a>
+          <timer autostart="false" interval="1000">{{seconds}}</timer>
+          <a ng-click="vm.timerStart(v)" class="btn btn-default btn-xs">
+            <i class="mdi-av-play-arrow"></i>
+          </a>
+          <a ng-click="vm.timerStop(v)" class="btn btn-default btn-xs">
+            <i class="mdi-av-stop"></i>
+          </a>
+          <a ng-click="vm.deleteToggle(v)" class="btn btn-default btn-xs">
+            <i class="mdi-action-highlight-remove"></i>
+          </a>
         </td>
       </tr>
       </tbody>
