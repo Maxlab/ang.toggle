@@ -30,8 +30,8 @@
     });
   }
 
-  MainCtrl.$inject = ['$scope','$rootScope','$log','$localStorage'];
-  function MainCtrl($scope,$rootScope,$log,$localStorage) {
+  MainCtrl.$inject = ['$scope','$rootScope','$log','$localStorage','servClock'];
+  function MainCtrl($scope,$rootScope,$log,$localStorage,servClock) {
     var self = this;
     $rootScope.curPath = 'main';
 
@@ -41,8 +41,8 @@
       title: 'Name',
       pricePerSeconds: 0
     };
-    self.handle = Clock();
-    self.timerRunning = false;
+    self.handle = [];
+    self.interval = [];
 
 
     self.addToggle = function() {
@@ -59,11 +59,12 @@
 
       $localStorage[id] = {
         id: id,
+        title: self.toggle.title,
         time: 0,
-        priceForAllTime: 0
+        pricePerSeconds: self.toggle.pricePerSeconds,
+        priceForAllTime: 0,
+        timerRunning: false
       };
-      $localStorage[id].title = self.toggle.title;
-      $localStorage[id].pricePerSeconds = self.toggle.pricePerSeconds;
       self.toggle = {
         title: 'Name',
         pricePerSeconds: 0
@@ -75,53 +76,27 @@
 
 
     self.timerStart = function (v){
-
-      self.handle = Clock(v.id);
-      self.handle.start();
-
-      self.interval = setInterval(function () {
+      $log.debug(servClock);
+      self.handle[v.id] = servClock(v.id);
+      self.handle[v.id].start();
+      self.interval[v.id] = setInterval(function () {
         $scope.$apply(function(){
-          v.time = self.handle.getTotal();
-          $log.debug(v.time);
+          $localStorage[v.id].time = self.handle[v.id].getTotal();
+          $localStorage[v.id].priceForAllTime = $localStorage[v.id].time * $localStorage[v.id].pricePerSeconds;
         });
       }, 1000);
-
-      self.timerRunning = true;
+      $localStorage[v.id].timerRunning = true;
     };
     self.timerStop = function (v){
-      self.handle.stop(v.id);
-      clearInterval(self.interval);
-      self.timerRunning = false;
+      self.handle[v.id].stop(v.id);
+      clearInterval(self.interval[v.id]);
+      $localStorage[v.id].timerRunning = false;
     };
 
   }
 
 
-  //todo move to service
-  var Clock = function(id){
-    var totalSeconds = [];
-    var intervals = [];
-    return {
-      start: function () {
-        intervals[id] = setInterval(function () {
-          totalSeconds[id] = Number(totalSeconds[id]) + 1;
-        }, 1000);
-      },
 
-      getTotal: function() {
-        return totalSeconds[id];
-      },
-
-      stop: function (id) {
-        clearInterval(intervals[id]);
-        delete intervals[id];
-      },
-
-      resume: function () {
-        if (!intervals[id]) this.start();
-      }
-    }
-  };
 
 
 

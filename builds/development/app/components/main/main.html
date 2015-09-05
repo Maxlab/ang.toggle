@@ -9,23 +9,22 @@
       <tr>
         <th>Title</th>
         <th>Time</th>
-        <th>Price</th>
+        <th>Price per Second</th>
         <th>Price for all Time</th>
         <th></th>
       </tr>
       </thead>
       <tbody>
       <tr ng-repeat="v in vm.toggles">
-        <td><input type="text" ng-model="v.title"/></td>
+        <td><input type="text" ng-model="v.title" ng-disabled="v.timerRunning"/></td>
         <td>{{v.time}}</td>
-        <td><input type="number" ng-model="v.pricePerSeconds"/></td>
-        <td>{{v.priceForAllTime}}</td>
+        <td><input type="number" ng-model="v.pricePerSeconds" ng-disabled="v.timerRunning"/></td>
+        <td>{{v.priceForAllTime | currency:"$"}}</td>
         <td>
-          <timer autostart="false" interval="1000">{{seconds}}</timer>
-          <a ng-click="vm.timerStart(v)" class="btn btn-default btn-xs">
+          <a ng-click="vm.timerStart(v)" ng-hide="v.timerRunning" class="btn btn-default btn-xs">
             <i class="mdi-av-play-arrow"></i>
           </a>
-          <a ng-click="vm.timerStop(v)" class="btn btn-default btn-xs">
+          <a ng-click="vm.timerStop(v)" ng-hide="!v.timerRunning" class="btn btn-default btn-xs">
             <i class="mdi-av-stop"></i>
           </a>
           <a ng-click="vm.deleteToggle(v)" class="btn btn-default btn-xs">
