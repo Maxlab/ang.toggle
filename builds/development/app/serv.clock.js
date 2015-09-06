@@ -20,16 +20,13 @@
             totalSeconds[id] += 1;
           }, 1000);
         },
-
         getTotal: function() {
           return totalSeconds[id];
         },
-
         stop: function (id) {
           clearInterval(intervals[id]);
           delete intervals[id];
         },
-
         resume: function () {
           if (!intervals[id]) this.start();
         }

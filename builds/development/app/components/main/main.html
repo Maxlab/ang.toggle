@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-10 col-lg-offset-1">
 
 
     <h2>{{vm.title}}</h2>
@@ -7,26 +7,36 @@
     <table class="table table-striped table-hover ">
       <thead>
       <tr>
-        <th>Title</th>
-        <th>Time</th>
-        <th>Price per Second</th>
-        <th>Price for all Time</th>
+        <th>Название</th>
+        <th>Времени на задачу (сек)</th>
+        <th>Времени осталось</th>
+        <th>Бюджет</th>
+        <th>Денег потрачено</th>
         <th></th>
       </tr>
       </thead>
       <tbody>
       <tr ng-repeat="v in vm.toggles">
-        <td><input type="text" ng-model="v.title" ng-disabled="v.timerRunning"/></td>
-        <td>{{v.time}}</td>
-        <td><input type="number" ng-model="v.pricePerSeconds" ng-disabled="v.timerRunning"/></td>
-        <td>{{v.priceForAllTime | currency:"$"}}</td>
-        <td>
+        <td class="col-lg-1"><input type="text" ng-model="v.title" ng-disabled="v.timerRunning"/></td>
+        <td class="col-lg-1"><input type="text" ng-model="v.timeEnd"
+                                                ng-disabled="v.timerRunning"
+                                                ng-change="[v.timeSpended = v.timeEnd, v.spended = 0]"/></td>
+        <td class="col-lg-1">{{v.timeSpended | toTimeHHMMSS}}</td>
+        <td class="col-lg-1"><input type="number" ng-model="v.priceTask"
+                                                  ng-disabled="v.timerRunning"
+                                                  ng-change="v.spended = 0"/></td>
+        <td class="col-lg-1">{{v.spended | currency:"p."}}</td>
+        <td class="col-lg-4">
           <a ng-click="vm.timerStart(v)" ng-hide="v.timerRunning" class="btn btn-default btn-xs">
             <i class="mdi-av-play-arrow"></i>
           </a>
           <a ng-click="vm.timerStop(v)" ng-hide="!v.timerRunning" class="btn btn-default btn-xs">
             <i class="mdi-av-stop"></i>
           </a>
+          <a ng-click="vm.timerReset(v)" ng-hide="v.timerRunning" class="btn btn-default btn-xs">
+            <i class="mdi-notification-sync"></i>
+          </a>
+
           <a ng-click="vm.deleteToggle(v)" class="btn btn-default btn-xs">
             <i class="mdi-action-highlight-remove"></i>
           </a>
@@ -36,11 +46,27 @@
     </table>
 
 
-    <form name="addToggle" ng-submit="vm.addToggle()">
-      <input class="form-control" type="text" ng-model="vm.toggle.title"/>
-      <input class="form-control" type="number" ng-model="vm.toggle.pricePerSeconds"/>
-      <button class="btn btn-primary">ADD TOGGLE</button>
-    </form>
+    <div class="col-lg-6">
+      <div class="row">
+        <form name="addToggle" ng-submit="vm.addToggle()">
+
+
+          <div class="col-lg-12">
+            <input class="form-control" type="text" ng-model="vm.toggle.title" placeholder="Название задачи..."/>
+          </div>
+
+          <div class="col-lg-12">
+            <input class="form-control" type="number" ng-model="vm.toggle.priceTask" placeholder="Бюджет задачи (р.)..."/>
+          </div>
+
+          <div class="col-lg-12">
+            <input class="form-control" type="number" ng-model="vm.toggle.timeEnd" placeholder="Время на задачу в секундах..."/>
+          </div>
+
+          <button class="btn btn-primary">ДОБАВИТЬ ЗАДАЧУ</button>
+        </form>
+      </div>
+    </div>
 
 
 
